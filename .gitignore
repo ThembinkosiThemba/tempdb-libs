@@ -1,0 +1,9 @@
+/js/node_modules
+./js/node_modules
+.npmignore
+
+/python/myenv
+/python/dist
+/python/build
+
+/rust/target
