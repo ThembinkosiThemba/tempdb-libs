@@ -94,13 +94,20 @@ func (c *TempDBClient) sendCommand(command string) (string, error) {
 	return strings.TrimSpace(response), nil
 }
 
+func (c *TempDBClient) CreateDB(email, tier, dbName string) (string, error) {
+	return c.sendCommand(fmt.Sprintf("CREATE_DB %s %s %s", email, tier, dbName))
+}
+
+func (c *TempDBClient) UpdateToken(email, db_name string) (string, error) {
+	return c.sendCommand(fmt.Sprintf("UPDATE_TOKEN %s %s", email, db_name))
+}
+
 func (c *TempDBClient) Set(key, value string) (string, error) {
-	fmt.Println("Set method called with key:", key, "and value:", value)
 	return c.sendCommand(fmt.Sprintf("SET %s %s", key, value))
 }
 
-func (c *TempDBClient) Get(key string) (string, error) {
-	return c.sendCommand(fmt.Sprintf("GET %s", key))
+func (c *TempDBClient) GetByKey(key string) (string, error) {
+	return c.sendCommand(fmt.Sprintf("GET_KEY %s", key))
 }
 
 func (c *TempDBClient) SetEx(key string, seconds int, value string) (string, error) {
@@ -119,16 +126,16 @@ func (c *TempDBClient) SAdd(key, value string) (string, error) {
 	return c.sendCommand(fmt.Sprintf("SADD %s %s", key, value))
 }
 
-func (c *TempDBClient) SetData(key string, value interface{}) (string, error) {
+func (c *TempDBClient) Store(key string, value interface{}) (string, error) {
 	jsonValue, err := json.Marshal(value)
 	if err != nil {
 		return "", err
 	}
-	return c.sendCommand(fmt.Sprintf("SETJSON %s %s", key, string(jsonValue)))
+	return c.sendCommand(fmt.Sprintf("STORE %s %s", key, string(jsonValue)))
 }
 
-func (c *TempDBClient) GetJson(key, field string) (string, error) {
-	return c.sendCommand(fmt.Sprintf("GETJSON %s /%s", key, field))
+func (c *TempDBClient) GetFieldByKey(key, field string) (string, error) {
+	return c.sendCommand(fmt.Sprintf("GET_FIELD %s /%s", key, field))
 }
 
 func (c *TempDBClient) ViewData() (string, error) {

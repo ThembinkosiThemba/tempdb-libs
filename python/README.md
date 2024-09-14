@@ -1,6 +1,6 @@
 # TempDB Client
 
-A Python client for TempDB. 
+A Python client for TempDB.
 
 ## Installation
 
@@ -10,7 +10,7 @@ You can install the package using pip:
 pip install tempdb-py
 ```
 
-### Usage 
+### Usage
 
 ```sh
 import os
@@ -22,7 +22,7 @@ def main():
         print('API_KEY environment variable is not set')
         return
 
-    client = TempDBClient('0.0.0.0:3000', 'ecommerce-store', api_key)
+    client = TempDBClient('db-server-url', 'ecommerce-store', api_key)
 
     try:
         # Example usage when storing product information
@@ -33,11 +33,11 @@ def main():
             "Locations": "US"
         }
 
-        set_response = client.set_data('p:1', product_data)
+        set_response = client.store('p:1', product_data)
         print('Set product info response:', set_response)
 
         # Getting a particular product information
-        get_product_info = client.get('p:1')
+        get_product_info = client.get_by_key('p:1')
         print('Retrieved product info:', get_product_info)
 
     except Exception as e:

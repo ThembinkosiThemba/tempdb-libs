@@ -22,7 +22,7 @@ func main() {
 	defer client.Close()
 
 	// Example usage when storing product information
-	response, err := client.SetData("p:9", map[string]interface{}{
+	response, err := client.Store("p:9", map[string]interface{}{
 		"name":      "Laptop",
 		"price":     999.99,
 		"stock":     50,
@@ -36,7 +36,7 @@ func main() {
 	}
 
 	// getting a particular product information
-	getProductInfo, err := client.Get("p:1")
+	getProductInfo, err := client.GetByKey("p:1")
 	if err != nil {
 		log.Println("failed to get :", err)
 	} else {

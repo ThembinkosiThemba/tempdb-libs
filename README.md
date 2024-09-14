@@ -44,14 +44,14 @@ func main() {
 	/// 1. The address, either locally is ran there, or on a hosted client which is comming soon.
 	/// 2. The database, this is the database you will be using to store data using the client.
 	/// 3. Token, for access control, you will need to provide
-	client, err := tempdb.NewClient("0.0.0.0:3000", "ecommerce-store", apiKey)
+	client, err := tempdb.NewClient("db-server-url", "ecommerce-store", apiKey)
 	if err != nil {
 		log.Fatalf("Failed to get client: %v", err)
 	}
 	defer client.Close()
 
 	// Example usage when storing product information
-	response, err := client.SetJson("p:1", map[string]interface{}{
+	response, err := client.Store("p:1", map[string]interface{}{
 		"name":      "Laptop",
 		"price":     999.99,
 		"stock":     50,
@@ -65,7 +65,7 @@ func main() {
 	}
 
 	// getting a particular product information
-	getProductInfo, err := client.Get("p:1")
+	getProductInfo, err := client.GetByKey("p:1")
 	if err != nil {
 		log.Println("failed to get :", err)
 	} else {
@@ -102,7 +102,7 @@ async function main() {
     // 1. The address (either local or hosted)
     // 2. The database name
     // 3. The API key for access control
-    client = new TempDBClient("0.0.0.0:3000", "ecommerce-store", apiKey);
+    client = new TempDBClient("db-server-url", "ecommerce-store", apiKey);
 
     // Example usage when storing product information
     const productData = {
@@ -112,11 +112,11 @@ async function main() {
       Locations: "US",
     };
 
-    const setResponse = await client.setData("p:1", productData);
+    const setResponse = await client.store("p:1", productData);
     console.log("Set product info response:", setResponse);
 
     // Getting a particular product information
-    const getProductInfo = await client.get("p:1");
+    const getProductInfo = await client.getByKey("p:1");
     console.log("Retrieved product info:", getProductInfo);
   } catch (error) {
     console.error("Error:", error.message);
@@ -150,7 +150,7 @@ def main():
         print('API_KEY environment variable is not set')
         return
 
-    client = TempDBClient('0.0.0.0:3000', 'ecommerce-store', api_key)
+    client = TempDBClient('db-server-url', 'ecommerce-store', api_key)
 
     try:
         # Example usage when storing product information
@@ -161,11 +161,11 @@ def main():
             "Locations": "US"
         }
 
-        set_response = client.set_data('p:1', product_data)
+        set_response = client.store('p:1', product_data)
         print('Set product info response:', set_response)
 
         # Getting a particular product information
-        get_product_info = client.get('p:1')
+        get_product_info = client.getByKey('p:1')
         print('Retrieved product info:', get_product_info)
 
     except Exception as e:

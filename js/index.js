@@ -54,8 +54,8 @@ class TempDBClient {
     return this.sendCommand(`SET ${key} ${value}`);
   }
 
-  async get(key) {
-    return this.sendCommand(`GET ${key}`);
+  async getByKey(key) {
+    return this.sendCommand(`GET_KEY ${key}`);
   }
 
   async setEx(key, seconds, value) {
@@ -74,13 +74,13 @@ class TempDBClient {
     return this.sendCommand(`SADD ${key} ${value}`);
   }
 
-  async setData(key, value) {
+  async store(key, value) {
     const jsonValue = JSON.stringify(value);
-    return this.sendCommand(`SETJSON ${key} ${jsonValue}`);
+    return this.sendCommand(`STORE ${key} ${jsonValue}`);
   }
 
-  async getJson(key, field) {
-    return this.sendCommand(`GETJSON ${key} /${field}`);
+  async getFieldByKey(key, field) {
+    return this.sendCommand(`GET_FIELD ${key} /${field}`);
   }
 
   async viewData() {

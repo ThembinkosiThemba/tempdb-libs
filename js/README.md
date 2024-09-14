@@ -30,7 +30,7 @@ async function main() {
         // 1. The address (either local or hosted)
         // 2. The database name
         // 3. The API key for access control
-        client = new TempDBClient('0.0.0.0:3000', 'ecommerce-store', apiKey);
+        client = new TempDBClient('db-server-url', 'ecommerce-store', apiKey);
 
         // Example usage when storing product information
         const productData = {
@@ -40,11 +40,11 @@ async function main() {
             Locations: 'US'
         };
 
-        const setResponse = await client.setData('p:1', productData);
+        const setResponse = await client.store('p:1', productData);
         console.log('Set product info response:', setResponse);
 
         // Getting a particular product information
-        const getProductInfo = await client.get('p:1');
+        const getProductInfo = await client.getByKey('p:1');
         console.log('Retrieved product info:', getProductInfo);
 
     } catch (error) {

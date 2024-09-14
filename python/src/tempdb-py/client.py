@@ -28,8 +28,8 @@ class TempDBClient:
     def set(self, key, value):
         return self.send_command(f"SET {key} {value}")
 
-    def get(self, key):
-        return self.send_command(f"GET {key}")
+    def get_by_key(self, key):
+        return self.send_command(f"GET_KEY {key}")
 
     def set_ex(self, key, seconds, value):
         return self.send_command(f"SETEX {key} {seconds} {value}")
@@ -43,12 +43,12 @@ class TempDBClient:
     def sadd(self, key, value):
         return self.send_command(f"SADD {key} {value}")
 
-    def set_data(self, key, value):
+    def store(self, key, value):
         json_value = json.dumps(value)
-        return self.send_command(f"SETJSON {key} {json_value}")
+        return self.send_command(f"STORE {key} {json_value}")
 
-    def get_json(self, key, field):
-        return self.send_command(f"GETJSON {key} /{field}")
+    def get_field_by_key(self, key, field):
+        return self.send_command(f"GET_FIELD {key} /{field}")
 
     def view_data(self):
         return self.send_command("VIEW_DATA")
