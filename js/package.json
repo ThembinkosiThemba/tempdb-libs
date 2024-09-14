@@ -1,6 +1,6 @@
 {
   "name": "tempdb-js",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A simple node client for using TempDB",
   "main": "index.js",
   "scripts": {
