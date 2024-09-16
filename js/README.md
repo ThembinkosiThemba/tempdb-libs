@@ -1,4 +1,4 @@
-# TempDB Node client
+# Javascript
 
 This is a Javascript client library for interacting with the TempDB server.
 
@@ -13,6 +13,7 @@ npm install tempdb-js
 ## Usage
 
 Here's a basic example of how to use the TempDB JS client:
+
 ```javascript
 import TempDBClient from "tempdb-js";
 
@@ -40,11 +41,11 @@ async function main() {
             Locations: 'US'
         };
 
-        const setResponse = await client.store('p:1', productData);
+        const setResponse = await client.store('productX', productData);
         console.log('Set product info response:', setResponse);
 
         // Getting a particular product information
-        const getProductInfo = await client.getByKey('p:1');
+        const getProductInfo = await client.getByKey('productX');
         console.log('Retrieved product info:', getProductInfo);
 
     } catch (error) {

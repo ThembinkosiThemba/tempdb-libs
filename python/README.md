@@ -1,4 +1,4 @@
-# TempDB Client
+# Python
 
 A Python client for TempDB.
 
@@ -33,11 +33,11 @@ def main():
             "Locations": "US"
         }
 
-        set_response = client.store('p:1', product_data)
+        set_response = client.store('productX', product_data)
         print('Set product info response:', set_response)
 
         # Getting a particular product information
-        get_product_info = client.get_by_key('p:1')
+        get_product_info = client.get_by_key('productX')
         print('Retrieved product info:', get_product_info)
 
     except Exception as e:

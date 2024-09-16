@@ -1,4 +1,4 @@
-# TempDB Go Client
+# Go
 
 This is a Go client library for interacting with the TempDB server.
 
@@ -37,7 +37,7 @@ func main() {
 	defer client.Close()
 
 	// Example usage when storing product information
-	response, err := client.Store("p:1", map[string]interface{}{
+	response, err := client.Store("productX", map[string]interface{}{
 		"name":      "Laptop",
 		"price":     999.99,
 		"stock":     50,
@@ -51,7 +51,7 @@ func main() {
 	}
 
 	// getting a particular product information
-	getProductInfo, err := client.GetByKey("p:1")
+	getProductInfo, err := client.GetByKey("productX")
 	if err != nil {
 		log.Println("failed to get :", err)
 	} else {
@@ -61,6 +61,6 @@ func main() {
 
 ```
 
-Open this [file](./test.go) for examples.
+Open this [file](test.go) for examples.
 
 All methods return an error as the last return value. Always check this error to ensure your operations were successful.
