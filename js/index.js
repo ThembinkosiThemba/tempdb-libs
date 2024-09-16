@@ -50,6 +50,18 @@ class TempDBClient {
     });
   }
 
+  async createDB(email, subscriptionTier, dbName) {
+    return this.sendCommand(`CREATE_DB ${email} ${subscriptionTier} ${dbName}`);
+  }
+
+  async updateToken(email, dbName) {
+    return this.sendCommand(`UPDATE_TOKEN ${email} ${dbName}`);
+  }
+
+  async pingWithToken() {
+    return this.sendCommand(`${this.apiKey} PING`);
+  }
+
   async set(key, value) {
     return this.sendCommand(`SET ${key} ${value}`);
   }

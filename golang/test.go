@@ -3,26 +3,21 @@ package main
 import (
 	"fmt"
 	"log"
+	"os"
 
 	tempdb "github.com/ThembinkosiThemba/tempdb-go/lib"
 )
 
 func main() {
-	apiKey := "6828c7ef6604a7721140f6559bae4ac5ebb72732c431a72b67ee2397dcf31da5"
-
-	// apiKey := os.Getenv("API_KEY")
-	/// The NewCLient function initialises the client and takes 3 parameters
-	/// 1. The address, either locally is ran there, or on a hosted client which is comming soon.
-	/// 2. The database, this is the database you will be using to store data using the client.
-	/// 3. Token, for access control, you will need to provide
-	client, err := tempdb.NewClient("0.0.0.0:8080", "ecommerce-store", apiKey)
+	apiKey := os.Getenv("API_KEY")
+	client, err := tempdb.NewClient("db-server-url", "testing", apiKey)
 	if err != nil {
 		log.Fatalf("Failed to get client: %v", err)
 	}
 	defer client.Close()
 
 	// Example usage when storing product information
-	response, err := client.Store("p:9", map[string]interface{}{
+	response, err := client.Store("productX", map[string]interface{}{
 		"name":      "Laptop",
 		"price":     999.99,
 		"stock":     50,
@@ -36,7 +31,7 @@ func main() {
 	}
 
 	// getting a particular product information
-	getProductInfo, err := client.GetByKey("p:1")
+	getProductInfo, err := client.GetByKey("productX")
 	if err != nil {
 		log.Println("failed to get :", err)
 	} else {
