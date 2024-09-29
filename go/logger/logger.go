@@ -10,6 +10,13 @@ import (
 
 type LogLevel int
 
+const (
+	DEBUG LogLevel = iota
+	INFO
+	WARN
+	ERROR
+)
+
 type LogEntry struct {
 	Timestamp     string            `json:"timestamp"`
 	Message       string            `json:"message"`
